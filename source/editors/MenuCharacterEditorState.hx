@@ -1,4 +1,4 @@
-packager editors;
+package editors;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
