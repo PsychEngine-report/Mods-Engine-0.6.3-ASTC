@@ -12,7 +12,7 @@
       "type": "git",
       "dir": null,
       "ref": "main",
-      "url": "https://github.com/idkwhoiam381/linc_luajit-by-me"
+      "url": "https://github.com/AlafandyPorting/linc_luajit-0.6.3"
     },
     {
       "name": "flixel",
@@ -46,14 +46,14 @@
       "type": "git",
       "dir": null,
       "ref": "main",
-      "url": "https://github.com/idkwhoiam381/hxcpp-by-me"
+      "url": "https://github.com/AlafandyPorting/hxcpp-0.6.3"
     },
     {
       "name": "lime",
       "type": "git",
       "dir": null,
       "ref": "main",
-      "url": "https://github.com/idkwhoiam381/lime2"
+      "url": "https://github.com/AlafandyPorting/lime-0.6.3"
     },
     {
       "name": "openfl",
