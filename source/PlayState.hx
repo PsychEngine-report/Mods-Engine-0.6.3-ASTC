@@ -3127,18 +3127,28 @@ class PlayState extends MusicBeatState
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
-		if (health > 2)
-			health = 2;
+		// Cap health
+		if (health > 2) health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else
+		// Safe check
+		if (iconP1.animation.curAnim != null && iconP2.animation.curAnim != null)
+		{	
+			// Player 1 icon logic
+			if (healthBar.percent > 80)
+			iconP1.animation.curAnim.curFrame = 2;
+			else if (healthBar.percent < 20)
 			iconP1.animation.curAnim.curFrame = 0;
+			else
+			iconP1.animation.curAnim.curFrame = 1;
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
-		else
+			// Player 2 icon logic
+			if (healthBar.percent > 80)
 			iconP2.animation.curAnim.curFrame = 0;
+			else if (healthBar.percent < 20)
+			iconP2.animation.curAnim.curFrame = 2;
+			else
+			iconP2.animation.curAnim.curFrame = 1;
+		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;

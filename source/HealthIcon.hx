@@ -1,23 +1,23 @@
 package;
 
-import flixel.FlxSprite;
-import openfl.utils.Assets as OpenFlAssets;
-
-using StringTools;
+import flixel.graphics.frames.FlxAtlasFrames;
 
 class HealthIcon extends FlxSprite
 {
 	public var sprTracker:FlxSprite;
+	public var isAnimated:Bool = false;
+	
 	private var isOldIcon:Bool = false;
 	private var isPlayer:Bool = false;
 	private var char:String = '';
+	private var iconOffsets:Array<Float> = [0, 0];
 
-	public function new(char:String = 'bf', isPlayer:Bool = false)
+	public function new(char:String = 'bf', isPlayer:Bool = false, ?allowGPU:Bool = true)
 	{
 		super();
 		isOldIcon = (char == 'bf-old');
 		this.isPlayer = isPlayer;
-		changeIcon(char);
+		changeIcon(char, allowGPU);
 		scrollFactor.set();
 	}
 
@@ -29,34 +29,64 @@ class HealthIcon extends FlxSprite
 			setPosition(sprTracker.x + sprTracker.width + 12, sprTracker.y - 30);
 	}
 
-	public function swapOldIcon() {
-		if(isOldIcon = !isOldIcon) changeIcon('bf-old');
-		else changeIcon('bf');
-	}
+	public function changeIcon(char:String)
+	{
+		if (this.char == char)
+			return;
 
-	private var iconOffsets:Array<Float> = [0, 0];
-	public function changeIcon(char:String) {
-		if(this.char != char) {
-			var name:String = 'icons/' + char;
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-' + char; //Older versions of psych engine's support
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
-			var file:Dynamic = Paths.image(name);
+		this.char = char;
+		isAnimated = false;
 
-			loadGraphic(file); //Load stupidly first for getting the file size
-			loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr
+		var baseName:String = 'icons/' + char;
+		var iconPath:String = 'images/' + baseName + '.png';
+		var xmlPath:String = 'images/' + baseName + '.xml';
+
+		if (!Paths.fileExists(iconPath, IMAGE))
+			baseName = 'icons/icon-' + char;
+		if (!Paths.fileExists('images/' + baseName + '.png', IMAGE))
+			baseName = 'icons/icon-face';
+
+		if (Paths.fileExists('images/' + baseName + '.xml', TEXT))
+		{
+			isAnimated = true;
+			frames = Paths.getSparrowAtlas(baseName);
+
+			if (frames.getByName("idle0000") != null)
+				animation.addByPrefix("idle", "idle", 24, true);
+			if (frames.getByName("losing0000") != null)
+				animation.addByPrefix("losing", "losing", 24, true);
+			if (frames.getByName("winning0000") != null)
+				animation.addByPrefix("winning", "winning", 24, true);
+
+			if (animation.exists("idle"))
+				animation.play("idle");
+
 			iconOffsets[0] = (width - 150) / 2;
-			iconOffsets[1] = (width - 150) / 2;
-			updateHitbox();
+			iconOffsets[1] = (height - 150) / 2;
+		} else {
+			var graphic = Paths.image(baseName, allowGPU);
 
-			animation.add(char, [0, 1], 0, false, isPlayer);
+			var frameWidth:Int = Math.floor(graphic.height);
+			var frameCount:Int = Math.floor(graphic.width / frameWidth);
+			if (frameCount < 2) frameCount = 2;
+
+			loadGraphic(graphic, true, frameWidth, Math.floor(graphic.height));
+
+			var frameArray:Array<Int> = [];
+			for (i in 0...frameCount)
+				frameArray.push(i);
+
+			animation.add(char, frameArray, 0, false, isPlayer);
 			animation.play(char);
-			this.char = char;
 
-			antialiasing = ClientPrefs.globalAntialiasing;
-			if(char.endsWith('-pixel')) {
-				antialiasing = false;
-			}
+			iconOffsets[0] = (width - 150) / 2;
+			iconOffsets[1] = (height - 150) / 2;
 		}
+
+		if (char.endsWith('-pixel'))
+			antialiasing = false;
+		else
+			antialiasing = ClientPrefs.data.antialiasing;
 	}
 
 	override function updateHitbox()
@@ -66,7 +96,14 @@ class HealthIcon extends FlxSprite
 		offset.y = iconOffsets[1];
 	}
 
-	public function getCharacter():String {
+	public function getCharacter():String
+	{
 		return char;
+	}
+
+	public function playAnimation(name:String)
+	{
+		if (isAnimated && animation.exists(name))
+			animation.play(name);
 	}
 }
