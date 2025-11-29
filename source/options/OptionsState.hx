@@ -3,6 +3,7 @@ package options;
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
+
 import openfl.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -86,12 +87,14 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
+		#if mobile
 		var tipText:FlxText = new FlxText(150, FlxG.height - 24, 0, 'Press C to Go Mobile Controls Menu', 16);
 		tipText.setFormat("VCR OSD Mono", 17, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		tipText.borderSize = 1.25;
 		tipText.scrollFactor.set();
 		tipText.antialiasing = ClientPrefs.globalAntialiasing;
 		add(tipText);
+		#end
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -155,8 +158,8 @@ class OptionsState extends MusicBeatState
 		if (touchPad != null && touchPad.buttonC.justPressed) {
 			touchPad.active = touchPad.visible = persistentUpdate = false;
 			openSubState(new mobile.MobileControlSelectSubState());
-		#end
 		}
+		#end
 	}
 	
 	function changeSelection(change:Int = 0) {
