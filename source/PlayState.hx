@@ -4496,6 +4496,7 @@ class PlayState extends MusicBeatState
 		return -1;
 	}
 
+	#if mobile
 	private function onButtonPress(button:TouchButton):Void
 	{
 		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
@@ -4607,6 +4608,7 @@ class PlayState extends MusicBeatState
 			callOnLuas('onButtonRelease', [buttonCode]);
 		}
 	}
+	#end
 
 	// Hold notes
 	private function keyShit():Void
