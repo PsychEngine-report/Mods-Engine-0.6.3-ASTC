@@ -1,6 +1,7 @@
 package;
 
 import openfl.display.BitmapData;
+
 #if LUA_ALLOWED
 import llua.Lua;
 import llua.LuaL;
@@ -57,6 +58,7 @@ import hscript.Expr;
 import Discord;
 #end
 
+#if mobile
 #if android
 import android.widget.Toast as AndroidToast;
 import android.Tools as AndroidTools;
@@ -65,6 +67,7 @@ import android.PsychJNI;
 #end
 
 import mobile.TouchUtil;
+#end
 
 using StringTools;
 
