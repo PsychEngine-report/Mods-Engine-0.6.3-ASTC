@@ -43,6 +43,7 @@ using StringTools;
 /**
 	*DEBUG MODE
  */
+
 class CharacterEditorState extends MusicBeatState
 {
 	var char:Character;
@@ -219,7 +220,7 @@ class CharacterEditorState extends MusicBeatState
 	var onPixelBG:Bool = false;
 	var OFFSET_X:Float = 300;
 	function reloadBGs() {
-		var i:Int = bgLayer.members.length-1;
+		var i:Int = bgLayer.members.length - 1;
 		while(i >= 0) {
 			var memb:FlxSprite = bgLayer.members[i];
 			if(memb != null) {
@@ -852,12 +853,6 @@ class CharacterEditorState extends MusicBeatState
 			char.frames = Paths.getSparrowAtlas(char.imageFile);
 		}
 
-
-
-
-
-
-
 		if(char.animationsArray != null && char.animationsArray.length > 0) {
 			for (anim in char.animationsArray) {
 				var animAnim:String = '' + anim.anim;
@@ -1126,6 +1121,7 @@ class CharacterEditorState extends MusicBeatState
 		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 
 		if(!charDropDown.dropPanel.visible) {
+			#if mobile
 			if (touchPad.buttonB.justPressed || FlxG.keys.justPressed.ESCAPE) {
 				if(goToPlayState) {
 					MusicBeatState.switchState(new PlayState());
@@ -1200,8 +1196,6 @@ class CharacterEditorState extends MusicBeatState
 
 				var controlArray:Array<Bool> = [(touchPad.buttonLeft.justPressed && !touchPad.buttonG.pressed ) || FlxG.keys.justPressed.LEFT, (touchPad.buttonRight.justPressed && !touchPad.buttonG.pressed) || FlxG.keys.justPressed.RIGHT, (touchPad.buttonUp.justPressed && !touchPad.buttonG.pressed) || FlxG.keys.justPressed.UP, (touchPad.buttonDown.justPressed && !touchPad.buttonG.pressed) || FlxG.keys.justPressed.DOWN];
 
-
-
 				for (i in 0...controlArray.length) {
 					if(controlArray[i]) {
 						var holdShift = touchPad.buttonC.pressed || FlxG.keys.pressed.SHIFT;
@@ -1227,6 +1221,107 @@ class CharacterEditorState extends MusicBeatState
 					}
 				}
 			}
+			#else
+			if (FlxG.keys.justPressed.ESCAPE) {
+				if(goToPlayState) {
+					MusicBeatState.switchState(new PlayState());
+				} else {
+					MusicBeatState.switchState(new editors.MasterEditorMenu());
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				}
+				FlxG.mouse.visible = false;
+				return;
+			}
+
+			if (FlxG.keys.justPressed.R) {
+				FlxG.camera.zoom = 1;
+			}
+
+			if (FlxG.keys.pressed.E && FlxG.camera.zoom < 3) {
+				FlxG.camera.zoom += elapsed * FlxG.camera.zoom;
+				if(FlxG.camera.zoom > 3) FlxG.camera.zoom = 3;
+			}
+			if (FlxG.keys.pressed.Q && FlxG.camera.zoom > 0.1) {
+				FlxG.camera.zoom -= elapsed * FlxG.camera.zoom;
+				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
+			}
+
+			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
+			{
+				var addToCam:Float = 500 * elapsed;
+				if (FlxG.keys.pressed.SHIFT)
+					addToCam *= 4;
+
+				if (FlxG.keys.pressed.I)
+					camFollow.y -= addToCam;
+				else if (FlxG.keys.pressed.K)
+					camFollow.y += addToCam;
+
+				if (FlxG.keys.pressed.J)
+					camFollow.x -= addToCam;
+				else if (FlxG.keys.pressed.L)
+					camFollow.x += addToCam;
+			}
+
+			if(char.animationsArray.length > 0) {
+				if (FlxG.keys.justPressed.W)
+				{
+					curAnim -= 1;
+				}
+
+				if (FlxG.keys.justPressed.S)
+				{
+					curAnim += 1;
+				}
+
+				if (curAnim < 0)
+					curAnim = char.animationsArray.length - 1;
+
+				if (curAnim >= char.animationsArray.length)
+					curAnim = 0;
+
+				if (FlxG.keys.justPressed.S || FlxG.keys.justPressed.W || FlxG.keys.justPressed.SPACE)
+				{
+					char.playAnim(char.animationsArray[curAnim].anim, true);
+					genBoyOffsets();
+				}
+				if (FlxG.keys.justPressed.T)
+				{
+					char.animationsArray[curAnim].offsets = [0, 0];
+
+					char.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0], char.animationsArray[curAnim].offsets[1]);
+					ghostChar.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0], char.animationsArray[curAnim].offsets[1]);
+					genBoyOffsets();
+				}
+
+				var controlArray:Array<Bool> = [FlxG.keys.justPressed.LEFT, FlxG.keys.justPressed.RIGHT, FlxG.keys.justPressed.UP, FlxG.keys.justPressed.DOWN];
+
+				for (i in 0...controlArray.length) {
+					if(controlArray[i]) {
+						var holdShift = FlxG.keys.pressed.SHIFT;
+						var multiplier = 1;
+						if (holdShift)
+							multiplier = 10;
+
+						var arrayVal = 0;
+						if(i > 1) arrayVal = 1;
+
+						var negaMult:Int = 1;
+						if(i % 2 == 1) negaMult = -1;
+						char.animationsArray[curAnim].offsets[arrayVal] += negaMult * multiplier;
+
+						char.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0], char.animationsArray[curAnim].offsets[1]);
+						ghostChar.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0], char.animationsArray[curAnim].offsets[1]);
+
+						char.playAnim(char.animationsArray[curAnim].anim, false);
+						if(ghostChar.animation.curAnim != null && char.animation.curAnim != null && char.animation.curAnim.name == ghostChar.animation.curAnim.name) {
+							ghostChar.playAnim(char.animation.curAnim.name, false);
+						}
+						genBoyOffsets();
+					}
+				}
+			}
+			#end
 		}
 		//camMenu.zoom = FlxG.camera.zoom;
 		ghostChar.setPosition(char.x, char.y);
