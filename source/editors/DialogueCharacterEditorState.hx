@@ -3,6 +3,7 @@ package editors;
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -30,6 +31,7 @@ import flixel.FlxCamera;
 import flixel.group.FlxSpriteGroup;
 import lime.system.Clipboard;
 import Alphabet;
+
 #if sys
 import sys.io.File;
 #end
@@ -618,6 +620,8 @@ class DialogueCharacterEditorState extends MusicBeatState
 				camGame.zoom += elapsed * camGame.zoom;
 				if(camGame.zoom > 1) camGame.zoom = 1;
 			}
+
+			#if mobile
 			if(touchPad.buttonY.justPressed || FlxG.keys.justPressed.H) {
 				if(UI_mainbox.selected_tab_id == 'Animations') {
 					currentGhosts++;
@@ -636,6 +640,26 @@ class DialogueCharacterEditorState extends MusicBeatState
 				mainGroup.setPosition(0, 0);
 				hudGroup.visible = true;
 			}
+			#else
+			if(FlxG.keys.justPressed.H) {
+				if(UI_mainbox.selected_tab_id == 'Animations') {
+					currentGhosts++;
+					if(currentGhosts > 2) currentGhosts = 0;
+
+					ghostLoop.visible = (currentGhosts != 1);
+					ghostIdle.visible = (currentGhosts != 2);
+					ghostLoop.alpha = (currentGhosts == 2 ? 1 : 0.6);
+					ghostIdle.alpha = (currentGhosts == 1 ? 1 : 0.6);
+				} else {
+					hudGroup.visible = !hudGroup.visible;
+				}
+			}
+			if(FlxG.keys.justPressed.R) {
+				camGame.zoom = 1;
+				mainGroup.setPosition(0, 0);
+				hudGroup.visible = true;
+			}
+			#end
 
 			if(UI_mainbox.selected_tab_id != lastTab) {
 				if(UI_mainbox.selected_tab_id == 'Animations') {
@@ -698,11 +722,23 @@ class DialogueCharacterEditorState extends MusicBeatState
 				}
 			}
 
-			if(#if android FlxG.android.justPressed.BACK || #end touchPad.buttonB.justPressed || FlxG.keys.justPressed.ESCAPE) {
+			#if mobile
+			if(
+				#if android
+				FlxG.android.justPressed.BACK ||
+				#end
+				touchPad.buttonB.justPressed || FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 				transitioning = true;
 			}
+			#else
+			if(FlxG.keys.justPressed.ESCAPE) {
+				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
+				transitioning = true;
+			}
+			#end
 
 			ghostLoop.setPosition(character.x, character.y);
 			ghostIdle.setPosition(character.x, character.y);
