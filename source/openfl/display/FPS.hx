@@ -1,5 +1,7 @@
 package openfl.display;
 
+import flixel.FlxG;
+
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
