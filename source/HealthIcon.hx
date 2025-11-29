@@ -64,7 +64,7 @@ class HealthIcon extends FlxSprite
 			iconOffsets[0] = (width - 150) / 2;
 			iconOffsets[1] = (height - 150) / 2;
 		} else {
-			var graphic = Paths.image(baseName, allowGPU);
+			var graphic = Paths.image(baseName);
 
 			var frameWidth:Int = Math.floor(graphic.height);
 			var frameCount:Int = Math.floor(graphic.width / frameWidth);
