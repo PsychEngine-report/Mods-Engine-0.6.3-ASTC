@@ -43,31 +43,12 @@ class HealthIcon extends FlxSprite
 
 		var baseName:String = 'icons/' + char;
 		var iconPath:String = 'images/' + baseName + '.png';
-		var xmlPath:String = 'images/' + baseName + '.xml';
 
 		if (!Paths.fileExists(iconPath, IMAGE))
 			baseName = 'icons/icon-' + char;
 		if (!Paths.fileExists('images/' + baseName + '.png', IMAGE))
 			baseName = 'icons/icon-face';
-
-		if (Paths.fileExists('images/' + baseName + '.xml', TEXT))
-		{
-			isAnimated = true;
-			frames = Paths.getSparrowAtlas(baseName);
-
-			if (frames.getByName("idle0000") != null)
-				animation.addByPrefix("idle", "idle", 24, true);
-			if (frames.getByName("losing0000") != null)
-				animation.addByPrefix("losing", "losing", 24, true);
-			if (frames.getByName("winning0000") != null)
-				animation.addByPrefix("winning", "winning", 24, true);
-
-			if (animation.exists("idle"))
-				animation.play("idle");
-
-			iconOffsets[0] = (width - 150) / 2;
-			iconOffsets[1] = (height - 150) / 2;
-		} else {
+		
 			var graphic = Paths.image(baseName);
 
 			var frameWidth:Int = Math.floor(graphic.height);
@@ -103,11 +84,5 @@ class HealthIcon extends FlxSprite
 	public function getCharacter():String
 	{
 		return char;
-	}
-
-	public function playAnimation(name:String)
-	{
-		if (isAnimated && animation.exists(name))
-			animation.play(name);
 	}
 }
