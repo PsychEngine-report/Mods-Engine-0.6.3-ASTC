@@ -111,9 +111,11 @@ class EditorPlayState extends MusicBeatState
 		else
 			vocals = new FlxSound();
 
+		#if mobile
 		#if !android
 		addTouchPad("NONE", "P");
 		addTouchPadCamera();
+		#end
 		#end
 		
 		#if mobile
