@@ -338,13 +338,28 @@ class EditorPlayState extends MusicBeatState
 	public var noteKillOffset:Float = 350;
 	public var spawnTime:Float = 2000;
 	override function update(elapsed:Float) {
-		if (#if android FlxG.android.justReleased.BACK #else touchPad.buttonP.justPressed #end || FlxG.keys.justPressed.ESCAPE)
+		#if mobile
+		if (
+			#if android
+			FlxG.android.justReleased.BACK
+			#else
+			touchPad.buttonP.justPressed
+			#end
+			|| FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = #if !android touchPad.visible = #end false;
 			FlxG.sound.music.pause();
 			vocals.pause();
 			LoadingState.loadAndSwitchState(new editors.ChartingState());
 		}
+		#else
+		if (FlxG.keys.justPressed.ESCAPE)
+		{
+			FlxG.sound.music.pause();
+			vocals.pause();
+			LoadingState.loadAndSwitchState(new editors.ChartingState());
+		}
+		#end
 
 		if (startingSong) {
 			timerToStart -= elapsed * 1000;
