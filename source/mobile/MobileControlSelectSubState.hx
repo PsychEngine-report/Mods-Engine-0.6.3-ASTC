@@ -69,7 +69,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 			FlxColor.fromRGB(FlxG.random.int(0, 255), FlxG.random.int(0, 255), FlxG.random.int(0, 255))));
 		bg.velocity.set(40, 40);
 		bg.alpha = 0;
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.antialiasing;
 		FlxTween.tween(bg, {alpha: 0.45}, 0.3, {
 			ease: FlxEase.quadOut,
 			onComplete: (twn:FlxTween) ->

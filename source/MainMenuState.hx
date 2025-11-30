@@ -121,6 +121,12 @@ class MainMenuState extends MusicBeatState
 		
 		// magenta.scrollFactor.set();
 
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
+
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
@@ -148,22 +154,39 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
+			// menuItem.screenCenter(X);
+			menuItem.x = 95;
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
+		// Mods Engine Old Logo
+		/*
+		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogoOld'));
 		modsEngineLogo.scrollFactor.x = 0;
 		modsEngineLogo.scrollFactor.y = 0;
-		modsEngineLogo.antialiasing = ClientPrefs.antialiasing;
+		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
 		modsEngineLogo.visible = true;
 		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
-		modsEngineLogo.screenCenter();
+		modsEngineLogo.screenCenter(Y);
 		modsEngineLogo.x = 735;
-		modsEngineLogo.y = 233;
 		modsEngineLogo.scale.x = 0.5;
 		modsEngineLogo.scale.y = 0.5;
+		add(modsEngineLogo);
+		*/
+
+		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
+		modsEngineLogo.scrollFactor.x = 0;
+		modsEngineLogo.scrollFactor.y = 0;
+		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
+		modsEngineLogo.visible = true;
+		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
+		modsEngineLogo.updateHitbox();
+		modsEngineLogo.screenCenter(Y);
+		modsEngineLogo.x = 735;
+		modsEngineLogo.scale.x = 0.4;
+		modsEngineLogo.scale.y = 0.4;
 		add(modsEngineLogo);
 
 		var modsVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Mods Engine v" + modsEngineVersion, 12);

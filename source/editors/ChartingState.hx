@@ -240,7 +240,28 @@ class ChartingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
 		bg.color = 0xFF222222;
+
+		switch (ClientPrefs.themes) {
+			case 'Mods Engine':
+				bg.color = 0xFF000022;
+			
+			case 'Psych Engine':
+				bg.color = 0xFF222222;
+		}
 		add(bg);
+
+		switch (ClientPrefs.themes) {
+			case 'Mods Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+			
+			case 'Psych Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		}
+
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();
 		add(gridLayer);

@@ -45,6 +45,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	public var title:String;
 	public var rpcTitle:String;
 
+	public var grid:FlxBackdrop;
+
 	public function new()
 	{
 		super();
@@ -58,9 +60,26 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
+		
+		switch (ClientPrefs.themes) {
+			case 'Mods Engine':
+				bg.color = 0xFF000080;
+			
+			case 'Psych Engine':
+				bg.color = 0xFFEA71FD;
+		}
+		
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.antialiasing;
 		add(bg);
+
+		switch (ClientPrefs.themes) {
+			case 'Mods Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+			
+			case 'Psych Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		}
 
 		// avoids lagspikes while scrolling through menus!
 		grpOptions = new FlxTypedGroup<Alphabet>();

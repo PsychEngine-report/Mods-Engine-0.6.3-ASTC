@@ -76,9 +76,24 @@ class ModsMenuState extends MusicBeatState
 		#end
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		switch (ClientPrefs.themes) {
+			case 'Mods Engine':
+				bg.color = 0xFF0000AF;
+			
+			case 'Psych Engine':
+				bg.color = 0xFF665AFF;
+		}
+		
+		bg.antialiasing = ClientPrefs.antialiasing;
 		add(bg);
 		bg.screenCenter();
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		final buttonBack:String = controls.mobileC ? 'B' : 'BACK';
 

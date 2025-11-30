@@ -51,6 +51,12 @@ class CreditsState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 		bg.screenCenter();
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -86,9 +92,9 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Template Team'],
 			['Ali Alafandy', 'alafandy', 'Recreation of Psych Engine', 'https://youtube.com/@alialafandy', '000080'],
-			['XPumpkingGuyX', 'pump', 'Compiler and Reformer of Psych Engine', 'https://youtube.com/@XPumpkingGuyX', '444444'],
-			['Ethantobot', 'ethan_and_mw', 'Reformer of Psych Engine', 'https://youtube.com/@ethanpater548', '808000'],
-			[''],
+			['Ethantobot', 'ethan_and_mw', 'Second Programmer of Mods Engine', 'https://youtube.com/@ethanpater548', '808000'],
+			['Special Thanks'],
+			['XPumpkingGuyX', 'pump', 'Coder And helper of Psyc Engine 0.6.3 template', 'https://youtube.com/@XPumpkingGuyX', '444444'],
 			['Psych Porting Team'],
 			['mcagabe19', 'lily', 'Head Porter of Psych Engine Mobile', 'https://youtube.com/@mcagabe19', 'FFE7C0'],
 			[''],
