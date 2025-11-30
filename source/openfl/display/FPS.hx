@@ -1,7 +1,5 @@
 package openfl.display;
 
-import flixel.FlxG;
-
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
@@ -67,8 +65,7 @@ class FPS extends TextField
 		selectable = false;
 		mouseEnabled = false;
 		defaultTextFormat = new TextFormat("_sans", 14, color);
-		//autoSize = LEFT;
-		width = FlxG.width;
+		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
 
