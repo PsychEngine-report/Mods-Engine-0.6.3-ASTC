@@ -20,9 +20,14 @@ If you want video support on your mod, simply do `haxelib install hxCodec` on a 
 
 otherwise, you can delete the "VIDEOS_ALLOWED" Line on Project.xml
 
+## Mods Engine Credits
+* Ali Alafandy - Head Coder And Main Programer
+* Ethantobot11 - Second Programer of Mods Engine
+  
 ## Tamplate Credits
 * Ali Alafandy - Templator
 * XPumpkingGuyX - Compiler
+* Ethantobot11 - Small Helper and Bugtester
 
 ## Mobile Credits:
 * Lily - Head Porter
