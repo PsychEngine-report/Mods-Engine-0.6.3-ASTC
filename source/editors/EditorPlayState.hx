@@ -340,12 +340,13 @@ class EditorPlayState extends MusicBeatState
 	override function update(elapsed:Float) {
 		#if mobile
 		if (
-			#if android
-			FlxG.android.justReleased.BACK
-			#else
-			touchPad.buttonP.justPressed
-			#end
-			|| FlxG.keys.justPressed.ESCAPE)
+		#if android
+		FlxG.android.justReleased.BACK
+		#else
+		touchPad.buttonP.justPressed
+		#end
+		
+		|| FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = #if !android touchPad.visible = #end false;
 			FlxG.sound.music.pause();

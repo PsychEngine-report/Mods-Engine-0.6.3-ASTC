@@ -3084,12 +3084,13 @@ class PlayState extends MusicBeatState
 
 		#if mobile
 		if (
-			#if android
-			FlxG.android.justReleased.BACK
-			#else
-			touchPad.buttonP.justPressed
-			#end
-			|| controls.PAUSE && startedCountdown && canPause)
+		#if android
+		FlxG.android.justReleased.BACK
+		#else
+		touchPad.buttonP.justPressed
+		#end
+		
+		|| controls.PAUSE && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnLuas('onPause', [], false);
 			if(ret != FunkinLua.Function_Stop) {
@@ -3992,10 +3993,11 @@ class PlayState extends MusicBeatState
 		}
 
 		#if mobile
-		mobileControls.instance.visible = #if !android
-										  touchPad.visible =
-										  #end
-										  false;
+		mobileControls.instance.visible =
+		#if !android
+		touchPad.visible =
+		#end
+		false;
 		#end
 		
 		timeBarBG.visible = false;

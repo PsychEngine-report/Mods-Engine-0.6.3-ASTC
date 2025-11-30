@@ -1,7 +1,5 @@
 package openfl.display;
 
-import flixel.FlxG;
-
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
@@ -60,15 +58,19 @@ class FPS extends TextField
 
 		os = '\nOS: ${LimeSystem.platformName} ${getArch() != 'Unknown' ? getArch() : ''} ${(LimeSystem.platformName == LimeSystem.platformVersion || LimeSystem.platformVersion == null) ? '' : '- ' + LimeSystem.platformVersion}';
 
+		#if mobile
+		this.x = 100;
+		#else
 		this.x = x;
+		#end
+
 		this.y = y;
 
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
 		defaultTextFormat = new TextFormat("_sans", 14, color);
-		//autoSize = LEFT;
-		width = FlxG.width;
+		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
 
