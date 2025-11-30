@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.system.FlxSound;
+import flixel.addons.display.FlxBackdrop;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end

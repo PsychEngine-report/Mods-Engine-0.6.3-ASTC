@@ -17,6 +17,7 @@ import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.addons.display.FlxBackdrop;
 import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;

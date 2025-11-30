@@ -25,6 +25,7 @@ import openfl.display.BitmapData;
 import openfl.geom.Rectangle;
 import flixel.ui.FlxButton;
 import flixel.FlxBasic;
+import flixel.addons.display.FlxBackdrop;
 import sys.io.File;
 /*import haxe.zip.Reader;
 import haxe.zip.Entry;
