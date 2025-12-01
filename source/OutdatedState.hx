@@ -29,7 +29,8 @@ class OutdatedState extends MusicBeatState
 		add(bg);
 
 		#if mobile
-		warnTextMobile = new FlxText(0, 0, FlxG.width,"Yoo, looks like you're running an   \n
+		warnTextMobile = new FlxText(0, 0, FlxG.width,
+			"Yoo, looks like you're running an   \n
 			outdated version of Mods Engine (" + MainMenuState.modsEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
 			Press B to proceed anyway.\n
@@ -41,7 +42,7 @@ class OutdatedState extends MusicBeatState
 		add(warnTextMobile);
 		#else
 		warnText = new FlxText(0, 0, FlxG.width,
-			0, 0, FlxG.width,"Yoo, looks like you're running an   \n
+		    "Yoo, looks like you're running an   \n
 			outdated version of Mods Engine (" + MainMenuState.modsEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
 			Press ESCAPE to proceed anyway.\n
