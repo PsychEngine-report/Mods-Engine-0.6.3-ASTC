@@ -341,6 +341,8 @@ class PlayState extends MusicBeatState
 	public var luaTouchPad:TouchPad;
 	#end
 
+	public var dancingLeft:Bool = false;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -1227,7 +1229,7 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		switch (ClientPrefs.data.hudColor) {
+		switch (ClientPrefs.hudColor) {
 			case 'Time Bar Only':
 				reloadTimeBarColor();
 			
@@ -1565,6 +1567,36 @@ class PlayState extends MusicBeatState
 
 		healthBar.updateBar();
 	}
+
+	public function reloadTimeBarColor() {
+		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+		
+		if (dadColor == FlxColor.BLACK) {
+			timeBar.setColors(0xFFFFFFFF);
+		} else {
+			timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
+		}
+	}
+
+
+	public function reloadHUDColor() {
+		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+
+    	if (dadColor == FlxColor.BLACK) {
+        	timeTxt.color = 0xFFFFFFFF;
+        	timeBar.setColors(0xFFFFFFFF);
+        	scoreTxt.color = 0xFFFFFFFF;
+        	botplayTxt.color = 0xFFFFFFFF;
+    	} else {
+        	var hudColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+			
+        	timeTxt.color = hudColor;
+        	timeBar.setColors(hudColor);
+        	scoreTxt.color = hudColor;
+        	botplayTxt.color = hudColor;
+    	}
+	}
+
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
 		switch(type) {
