@@ -52,11 +52,15 @@ class FPS extends TextField
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
+	public var engineVersion:String = '';
+
 	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
 		super();
 
+		if (LimeSystem.platformName == LimeSystem.platformVersion || LimeSystem.platformVersion == null)
 		os = '\nOS: ${LimeSystem.platformName} ${getArch() != 'Unknown' ? getArch() : ''} ${(LimeSystem.platformName == LimeSystem.platformVersion || LimeSystem.platformVersion == null) ? '' : '- ' + LimeSystem.platformVersion}';
+		engineVersion = '\nMods Engine v${states.MainMenuState.modsEngineVersion}';
 
 		#if mobile
 		this.x = 200;
@@ -131,6 +135,35 @@ class FPS extends TextField
 		}
 
 		cacheCount = currentCount;
+	}
+
+	public dynamic function updateText():Void // idk what this does ok ?
+	{
+		text = 
+		'FPS: $currentFPS' + 
+		'\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}' +
+		os +
+		engineVersion;
+
+		switch (ClientPrefs.themes) {
+			case 'Mods Engine':
+				textColor = 0xFF0000FF;
+			
+			case 'Psych Engine':
+				textColor = 0xFFFFFFFF;
+		}
+		
+		if (currentFPS < FlxG.drawFramerate * 0.5)
+			textColor = 0xFFFF0000;
+	}
+
+	inline function get_memoryMegas():Float
+		return cast(OpenFlSystem.totalMemory, UInt);
+
+	public inline function positionFPS(X:Float, Y:Float, ?scale:Float = 1){
+		scaleX = scaleY = #if android (scale > 1 ? scale : 1) #else (scale < 1 ? scale : 1) #end;
+		x = FlxG.game.x + X;
+		y = FlxG.game.y + Y;
 	}
 
 	#if windows
