@@ -1046,7 +1046,7 @@ class PlayState extends MusicBeatState
 
 		strumLine = new FlxSprite(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
-		if(ClientPrefs.data.timeBarType == 'Song Name')
+		if(ClientPrefs.timeBarType == 'Song Name')
 		strumLine.scrollFactor.set();
 		{
 			switch (ClientPrefs.botplayName) {

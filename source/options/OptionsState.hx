@@ -84,7 +84,7 @@ class OptionsState extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		switch (ClientPrefs.data.themes) {
+		switch (ClientPrefs.themes) {
 			case 'Mods Engine':
 				bg.color = 0xFF000080;
 			
