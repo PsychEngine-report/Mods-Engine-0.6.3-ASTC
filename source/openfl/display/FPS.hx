@@ -67,7 +67,7 @@ class FPS extends TextField
 			os = '\nOS: ${LimeSystem.platformName}' #if cpp + ' ${getArch() != 'Unknown' ? getArch() : ''}' #end;
 		else
 			os = '\nOS: ${LimeSystem.platformName}' #if cpp + ' ${getArch() != 'Unknown' ? getArch() : ''}' #end + ' - ${LimeSystem.platformVersion}';
-		engineVersion = '\nMods Engine v${states.MainMenuState.modsEngineVersion}';
+		engineVersion = '\nMods Engine v${MainMenuState.modsEngineVersion}';
 
 		#if mobile
 		this.x = 200;
