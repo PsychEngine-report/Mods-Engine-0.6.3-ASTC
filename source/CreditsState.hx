@@ -14,6 +14,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import flixel.addons.display.FlxBackdrop;
 
 #if MODS_ALLOWED
 import sys.FileSystem;

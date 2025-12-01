@@ -202,6 +202,7 @@ class ChartingState extends MusicBeatState
 	var text:String = "";
 	public static var vortex:Bool = false;
 	public var mouseQuant:Bool = false;
+	public var grid:FlxBackdrop;
 	override function create()
 	{
 		if (PlayState.SONG != null)
@@ -249,6 +250,7 @@ class ChartingState extends MusicBeatState
 			case 'Psych Engine':
 				bg.color = 0xFF222222;
 		}
+		
 		add(bg);
 
 		switch (ClientPrefs.themes) {

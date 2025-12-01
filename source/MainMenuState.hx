@@ -14,7 +14,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.math.FlxMath;
-import flixel.tweens.FlxEase;
+import import flixel.addons.display.FlxGridOverlay;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.addons.display.FlxBackdrop;
@@ -180,7 +180,7 @@ class MainMenuState extends MusicBeatState
 		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
 		modsEngineLogo.scrollFactor.x = 0;
 		modsEngineLogo.scrollFactor.y = 0;
-		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
+		modsEngineLogo.antialiasing = ClientPrefs.antialiasing;
 		modsEngineLogo.visible = true;
 		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
