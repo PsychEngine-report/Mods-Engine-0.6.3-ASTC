@@ -15,6 +15,7 @@
       "url": "https://github.com/AlafandyPorting/linc_luajit-0.6.3"
     },
     {
+      "name": "flixel",
       "type": "git",
       "dir": null,
       "ref": "main",
