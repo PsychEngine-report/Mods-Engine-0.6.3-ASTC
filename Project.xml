@@ -128,6 +128,7 @@
 
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
+	<haxelib name="flixel-tools" />
 	<haxelib name="hscript" />
 	<define name="hscriptPos" />
 
