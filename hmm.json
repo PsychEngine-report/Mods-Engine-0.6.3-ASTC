@@ -18,8 +18,8 @@
       "name": "flixel",
       "type": "git",
       "dir": null,
-      "ref": "master",
-      "url": "https://github.com/AliAlafandy/flixel-alafandy"
+      "ref": "main",
+      "url": "https://github.com/Ethantobot11/flixel-5.2.2-modsengine"
     },
     {
       "name": "flixel-addons",
