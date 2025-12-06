@@ -58,7 +58,7 @@
       "type": "git",
       "dir": null,
       "ref": "main",
-      "url": "https://github.com/AlafandyPorting/hxcpp-0.6.3"
+      "url": "https://github.com/FNF-SE/lime"
     },
     {
       "name": "lime",
@@ -69,8 +69,9 @@
     },
     {
       "name": "openfl",
-      "type": "haxelib",
-      "version": "9.2.2"
+      "type": "git",
+      "dir": null,
+      "url": "https://github.com/FNF-SE/openfl"
     },
     {
       "name": "flixel-tools",
