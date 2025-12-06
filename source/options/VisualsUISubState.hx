@@ -64,6 +64,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"If 'On': make HUD Color like Opponent Health Bar include Time Bar,\nIf 'Time Bar Only': make Time Bar Color like Opponent Health Bar Only.",
 			'hudColor',
 			'string',
+			'On',
 			['Off', 'Time Bar Only', 'On']);
 		addOption(option);
 
@@ -142,13 +143,15 @@ class VisualsUISubState extends BaseOptionsMenu
 		    'Change theme from different engines.\nThis option will work after close Options, for less lag!',
 			'themes',
 		    'string',
+			'Mods Engine',
 			['Mods Engine', 'Psych Engine']);
 		addOption(option);
 
 		var option:Option = new Option('Grid Title',
 			"If checked, make the Title or Song Intro have Grid.",
 			'gridTitle',
-			'bool');
+			'bool',
+			true);
 		addOption(option);
 
 		super();
