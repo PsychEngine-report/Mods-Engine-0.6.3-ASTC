@@ -1,3 +1,0 @@
-include ':app'
-include ':deps:extension-api'
-include ':deps:androidtools'
