@@ -16,32 +16,32 @@ jobs:
         include:
           - name: Windows x64
             os: windows-2022
-            buildArgs: "windows -final -X64 -D HXCPP_X64 -D 64bits"
+            buildArgs: "windows -final -X64 -D HXCPP_X64 -D 64bits -D astc"
             artifactName: Windows x64
             artifactPath: export\release\windows\bin\*
           - name: Windows x32
             os: windows-2022
-            buildArgs: "windows -final -X32 -D HXCPP_X32 -D 32bits"
+            buildArgs: "windows -final -X32 -D HXCPP_X32 -D 32bits -D astc"
             artifactName: Windows x32
             artifactPath: export\32bit\windows\bin\*
           - name: Linux
             os: ubuntu-22.04
-            buildArgs: "linux -final"
+            buildArgs: "linux -final -D astc"
             artifactName: Linux
             artifactPath: export/release/linux/bin/*
           - name: MacOS
             os: macos-15
-            buildArgs: "mac -final"
+            buildArgs: "mac -final -D astc"
             artifactName: MacOS
             artifactPath: export/release/macos/bin/*
           - name: Android
             os: macos-15
-            buildArgs: "android -final -D officialBuild"
+            buildArgs: "android -final -D officialBuild -D astc"
             artifactName: Android
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: iOS
             os: macos-15
-            buildArgs: "ios -final -nosign"
+            buildArgs: "ios -final -nosign -D astc"
             artifactName: iOS
             artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
     uses: ./.github/workflows/build.yml

@@ -51,9 +51,10 @@
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="TITLE_SCREEN_EASTER_EGG" if="officialBuild"/> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
 	<define name="DISCORD_ALLOWED" if="desktop" />
-
+	<section if="png">
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3"  unless="web"/>
+	</section>
 	<section if="TITLE_SCREEN_EASTER_EGG">
 		<assets path="assets/secrets" rename="assets" exclude="*.ogg" if="web"/>
 		<assets path="assets/secrets" rename="assets" exclude="*.mp3"  unless="web"/>
@@ -88,7 +89,8 @@
 		<library name="week6"         preload="false" />
 		<library name="week7"         preload="false" />
 	</section>
-	
+
+	<section if="png">
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3" unless="web"/>
@@ -106,6 +108,20 @@
 	<assets path="assets/week6"         library="week6"         exclude="*.mp3" unless="web"/>
 	<assets path="assets/week7"         library="week7"         exclude="*.ogg" if="web"/>
 	<assets path="assets/week7"         library="week7"         exclude="*.mp3" unless="web"/>
+	</section>
+
+	<section if="astc">
+		<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"/>
+		<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
+		<assets path="assets/songs"         library="songs"         exclude="*.mp3" unless="web"/>
+		<library name="shared"        path="images-astc/shared" library="shared" rename="assets/shared" />
+		<library name="week2" />
+		<library name="week3" />
+		<library name="week4" />
+		<library name="week5" />
+		<library name="week6"         path="images-astc/week6" library="week6" rename="assets/week6" />
+		<library name="week7"         path="images-astc/week7" library="week7" rename="assets/week7" />
+	</section>
 	
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>
