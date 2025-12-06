@@ -344,8 +344,6 @@ class PlayState extends MusicBeatState
 
 	public var dancingLeft:Bool = false;
 
-	public var uiGroup:FlxSpriteGroup;
-
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -1214,7 +1212,7 @@ class PlayState extends MusicBeatState
 				botplayTxt.scrollFactor.set();
 				botplayTxt.borderSize = 1.25;
 				botplayTxt.visible = cpuControlled;
-				uiGroup.add(botplayTxt);
+				add(botplayTxt);
 			
 			case 'Song Name':
 				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, SONG.song, 32);
@@ -1222,7 +1220,7 @@ class PlayState extends MusicBeatState
 				botplayTxt.scrollFactor.set();
 				botplayTxt.borderSize = 1.25;
 				botplayTxt.visible = cpuControlled;
-				uiGroup.add(botplayTxt);
+				add(botplayTxt);
 
 			case 'None':
 				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "", 32);
@@ -1230,7 +1228,7 @@ class PlayState extends MusicBeatState
 				botplayTxt.scrollFactor.set();
 				botplayTxt.borderSize = 1.25;
 				botplayTxt.visible = cpuControlled;
-				uiGroup.add(botplayTxt);
+				add(botplayTxt);
 		}
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
