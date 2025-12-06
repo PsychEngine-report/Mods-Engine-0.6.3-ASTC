@@ -51,6 +51,7 @@ class ClientPrefs {
 	public static var botplayName:String = 'Song Name';
 	public static var hudColor:String = 'On';
 	public static var themes:String = 'Mods Engine';
+	public static var public var gridTitle:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
