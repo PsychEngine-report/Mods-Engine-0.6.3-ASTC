@@ -65,13 +65,14 @@
       "type": "git",
       "dir": null,
       "ref": "main",
-      "url": "https://github.com/AlafandyPorting/lime-0.6.3"
+      "url": "https://github.com/th2l-devs/lime"
     },
     {
       "name": "openfl",
       "type": "git",
       "dir": null,
-      "url": "https://github.com/FNF-SE/openfl"
+      "ref": "develop",
+      "url": "https://github.com/th2l-devs/openfl"
     },
     {
       "name": "flixel-tools",
